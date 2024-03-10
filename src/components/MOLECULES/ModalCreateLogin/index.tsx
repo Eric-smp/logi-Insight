@@ -1,13 +1,31 @@
 import { X, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import * as Styles from "./styles";
 import { Input, Button } from "@/components";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
+import { TCreateUser } from "@/types";
 import { off } from "process";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export function ModalCreateLogin() {
   const [visiblePassword, setVisiblePassword] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { setIsModalOpen } = useGlobal();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<TCreateUser>();
+  const watchName = watch("createName");
+  const watchSurname = watch("createSurname");
+  const watchCNPJ = watch("createCNPJ");
+  const watchPassword = watch("createPassword");
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <Styles.ContentModal>
       <header>
@@ -16,8 +34,9 @@ export function ModalCreateLogin() {
         </span>
         <h1>Crie sua conta</h1>
       </header>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
+          register={register("createName")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu nome"}
@@ -28,6 +47,7 @@ export function ModalCreateLogin() {
           id="createName"
         />
         <Input
+          register={register("createSurname")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu sobrenome"}
@@ -38,6 +58,7 @@ export function ModalCreateLogin() {
           id="createSurname"
         />
         <Input
+          register={register("createCNPJ")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu CNPJ"}
@@ -48,6 +69,7 @@ export function ModalCreateLogin() {
           id="createCNPJ"
         />
         <Input
+          register={register("createPassword")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Crie uma senha"}
@@ -73,8 +95,13 @@ export function ModalCreateLogin() {
           text={"Criar conta"}
           heigth={"3rem"}
           width={"20rem"}
-          type={undefined}
+          type="submit"
           id="createLogin"
+          backgroundColor="blue"
+          color="white"
+          backgroundColorHover="white"
+          colorHover="blue"
+          // disabled={isButtonDisabled}
         />
       </form>
     </Styles.ContentModal>

@@ -12,6 +12,7 @@ export function Button({
   colorHover,
   backgroundColorHover,
   id,
+  disabled,
 }: TButton) {
   return (
     <Styles.buttonStyle
@@ -25,6 +26,7 @@ export function Button({
       colorHover={colorHover}
       type={type}
       id={id}
+      disabled={disabled}
     >
       <span>{text}</span>
     </Styles.buttonStyle>

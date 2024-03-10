@@ -1,6 +1,6 @@
 import { TInput } from "@/types";
 import * as Styles from "./styles";
-
+import InputMask from "react-input-mask";
 export function Input({
   heigth,
   placeholder,
@@ -13,10 +13,14 @@ export function Input({
   backgroundLalbe,
   autoComplete,
   id,
+  onChange,
+  register,
+  isInputMask,
 }: TInput) {
   return (
     <Styles.stylesInput divInput={width}>
       <Styles.Label backgroundLabel={backgroundLalbe}>{label}</Styles.Label>
+
       <Styles.inputStyle
         heigth={heigth}
         placeholder={placeholder}
@@ -29,7 +33,11 @@ export function Input({
         autoComplete={autoComplete}
         id={id}
         // backgroundLalbe={bac}
+        onChange={onChange}
+        register={register}
+        {...register}
       />
+
       <span className="prefixIcon">{icon}</span>
     </Styles.stylesInput>
   );

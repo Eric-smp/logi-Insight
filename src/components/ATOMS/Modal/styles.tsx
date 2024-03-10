@@ -11,7 +11,7 @@ export const Modal = styled.div<TModal>`
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(1rem);
-  background-color: #0f8beaba;
+  background-color: ${({ backgroundColorModal }) => backgroundColorModal};
   overflow-y: hidden;
   overflow-x: hidden;
   padding: 2rem;

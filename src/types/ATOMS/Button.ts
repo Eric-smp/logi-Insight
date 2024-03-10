@@ -11,4 +11,5 @@ export interface TButton{
     type: "button" | "submit" | "reset" | undefined
     id: string | undefined
     onClick?: MouseEventHandler<HTMLButtonElement> | undefined
+    disabled?: boolean 
 }

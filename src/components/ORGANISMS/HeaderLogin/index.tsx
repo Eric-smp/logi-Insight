@@ -5,6 +5,7 @@ export function HeaderLogin() {
   return (
     <Styles.componentHeader>
       <h1>Logi Insight</h1>
+      <NavHeaderDesktop />
     </Styles.componentHeader>
   );
 }

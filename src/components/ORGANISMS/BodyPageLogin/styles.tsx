@@ -64,6 +64,8 @@ export const wrapperLogin = styled.div`
       gap: 2rem;
       background-color: #7ae0f5;
       border-radius: 1rem;
+      overflow-x: hidden;
+      /* background-color: red; */
       .introductionSoftware {
         width: 100%;
         height: 100%;
