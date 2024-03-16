@@ -7,6 +7,7 @@ export * from './ATOMS/MaterialInputMask'
 export * from './MOLECULES/NavHeaderDesktop'
 export * from './MOLECULES/FormLogin'
 export * from './MOLECULES/ModalCreateLogin'
+export * from './MOLECULES/ModalInsertProduct'
 //ORGANISMS
 export * from './ORGANISMS/HeaderLogin'
 export * from './ORGANISMS/BodyPageLogin'

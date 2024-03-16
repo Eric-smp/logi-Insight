@@ -1,7 +1,7 @@
 import { X, Eye, EyeOff } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import * as Styles from "./styles";
-import { Input, Button } from "@/components";
+import { Input, Button, MaterialInputMask } from "@/components";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
 import { TCreateUser } from "@/types";
 import { off } from "process";
@@ -25,6 +25,23 @@ export function ModalCreateLogin() {
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (
+      watchName !== "" &&
+      watchName !== undefined &&
+      watchSurname !== "" &&
+      watchSurname !== undefined &&
+      watchCNPJ !== "" &&
+      watchCNPJ !== undefined &&
+      watchPassword !== "" &&
+      watchPassword !== undefined
+    ) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [watchCNPJ, watchName, watchPassword, watchSurname]);
 
   return (
     <Styles.ContentModal>
@@ -57,7 +74,8 @@ export function ModalCreateLogin() {
           autoComplete="new-password"
           id="createSurname"
         />
-        <Input
+        <MaterialInputMask
+          maskPattern="99.999.999/9999-99"
           register={register("createCNPJ")}
           width={"20rem"}
           heigth={"3rem"}
@@ -82,7 +100,7 @@ export function ModalCreateLogin() {
             visiblePassword ? (
               <EyeOff
                 onClick={() => {
-                  setVisiblePassword(false), console.log("osdoanosn");
+                  setVisiblePassword(false);
                 }}
                 width={"20px"}
               />
@@ -101,7 +119,7 @@ export function ModalCreateLogin() {
           color="white"
           backgroundColorHover="white"
           colorHover="blue"
-          // disabled={isButtonDisabled}
+          disabled={isButtonDisabled}
         />
       </form>
     </Styles.ContentModal>

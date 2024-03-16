@@ -4,6 +4,7 @@ import { TModal } from "@/types";
 export const Modal = styled.div<TModal>`
   height: 100vh;
   width: 100vw;
+  /* padding: 2rem; */
   z-index: 50;
   position: fixed;
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};

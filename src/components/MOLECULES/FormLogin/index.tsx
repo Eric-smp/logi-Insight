@@ -3,16 +3,16 @@ import * as Styles from "./styles";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
 import { useRouter } from "next/router";
 import { TUserLogin } from "@/types";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
-import ReactInputMask from "react-input-mask";
+import { Eye, EyeOff } from "lucide-react";
 
 interface TUserCNPJ {
   cnpj: string;
 }
 export function FormLogin() {
   const [disableButton, setDisabledButton] = useState(true);
-  const [usuarioCnpj, setUsuarioCnpj] = useState<TUserCNPJ>({} as TUserCNPJ);
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { setIsModalOpen, setModalType } = useGlobal();
   const router = useRouter();
   const {
@@ -32,6 +32,7 @@ export function FormLogin() {
     if (
       watchCNPJ !== undefined &&
       watchCNPJ !== "" &&
+      watchCNPJ.length === 18 &&
       watchPassword !== "" &&
       watchPassword !== undefined
     ) {
@@ -54,7 +55,7 @@ export function FormLogin() {
           type={"string"}
           id={"loginCNPJ"}
           maskPattern={"99.999.999/9999-99"}
-          autoComplete="off"
+          autoComplete="new-password"
         />
 
         {/* <Input
@@ -75,9 +76,19 @@ export function FormLogin() {
           heigth={""}
           placeholder={"Digite sua senha"}
           label={"senha"}
-          type="password"
+          type={!isVisiblePassword ? "password" : "text"}
           id="loginPassword"
-          autoComplete="off"
+          autoComplete="new-password"
+          icon={
+            !isVisiblePassword ? (
+              <EyeOff
+                width={"20px"}
+                onClick={() => setIsVisiblePassword(true)}
+              />
+            ) : (
+              <Eye width={"20px"} onClick={() => setIsVisiblePassword(false)} />
+            )
+          }
         />
         <Button
           text={"Entrar"}
@@ -86,8 +97,9 @@ export function FormLogin() {
           type="submit"
           id="loginIn"
           disabled={disableButton}
-
-          // onClick={() => router.push("/login")}
+          onClick={() => {
+            router.push("/home"), setIsModalOpen(true), setModalType(1);
+          }}
         />
         <Button
           text={"Criar conta"}
