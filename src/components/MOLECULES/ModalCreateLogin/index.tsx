@@ -10,17 +10,17 @@ import { useForm, SubmitHandler } from "react-hook-form";
 export function ModalCreateLogin() {
   const [visiblePassword, setVisiblePassword] = useState(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { setIsModalOpen } = useGlobal();
+  const { setIsModalOpen, handleGetUser } = useGlobal();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<TCreateUser>();
-  const watchName = watch("createName");
-  const watchSurname = watch("createSurname");
-  const watchCNPJ = watch("createCNPJ");
-  const watchPassword = watch("createPassword");
+  const watchName = watch("nome");
+  const watchSurname = watch("sobrenome");
+  const watchCNPJ = watch("cnpj");
+  const watchPassword = watch("senha");
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -51,9 +51,14 @@ export function ModalCreateLogin() {
         </span>
         <h1>Crie sua conta</h1>
       </header>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleGetUser)}>
         <Input
-          register={register("createName")}
+          register={register("nome", {
+            required: {
+              value: true,
+              message: "Informe seu nome",
+            },
+          })}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu nome"}
@@ -64,7 +69,7 @@ export function ModalCreateLogin() {
           id="createName"
         />
         <Input
-          register={register("createSurname")}
+          register={register("sobrenome")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu sobrenome"}
@@ -76,7 +81,7 @@ export function ModalCreateLogin() {
         />
         <MaterialInputMask
           maskPattern="99.999.999/9999-99"
-          register={register("createCNPJ")}
+          register={register("cnpj")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Digite seu CNPJ"}
@@ -87,7 +92,7 @@ export function ModalCreateLogin() {
           id="createCNPJ"
         />
         <Input
-          register={register("createPassword")}
+          register={register("senha")}
           width={"20rem"}
           heigth={"3rem"}
           placeholder={"Crie uma senha"}

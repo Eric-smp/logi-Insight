@@ -1,6 +1,6 @@
 export interface TCreateUser{
-    createName: string,
-    createSurname:string,
-    createCNPJ:string,
-    createPassword:string
+    nome: string,
+    sobrenome:string,
+    cnpj:string,
+    senha:string
 }

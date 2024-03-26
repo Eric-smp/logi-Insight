@@ -1,4 +1,4 @@
-export interface TUserLogin{
+export type TUserLogin = {
     cnpj: string,
-    password:string
+    senha:string
 }

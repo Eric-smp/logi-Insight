@@ -13,13 +13,15 @@ export function DashbordTeste() {
     <Styles.Wrapper>
       <h1>oiadsiamd</h1>
 
-      <form onSubmit={handleSubmit(dataForm)}>
+      {/* <form onSubmit={handleSubmit(dataForm)}>
         <MaterialInputMask
           mask={"99.999.999/9999-99"}
           register={register("cnpj")}
         />
         <button type="submit">Clique aqui</button>
-      </form>
+      </form> */}
+
+      {/* <h1>{process.env.GET_USERS}</h1> */}
     </Styles.Wrapper>
   );
 }

@@ -13,7 +13,7 @@ interface TUserCNPJ {
 export function FormLogin() {
   const [disableButton, setDisabledButton] = useState(true);
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
-  const { setIsModalOpen, setModalType } = useGlobal();
+  const { setIsModalOpen, setModalType, loginUser } = useGlobal();
   const router = useRouter();
   const {
     register,
@@ -22,7 +22,7 @@ export function FormLogin() {
     formState: { errors },
   } = useForm<TUserLogin>();
   const watchCNPJ = watch("cnpj");
-  const watchPassword = watch("password");
+  const watchPassword = watch("senha");
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -45,9 +45,14 @@ export function FormLogin() {
   return (
     <Styles.contentForm>
       <h1>Entrar</h1>
-      <Styles.Form onSubmit={handleSubmit(onSubmit)}>
+      <Styles.Form onSubmit={handleSubmit(loginUser)}>
         <MaterialInputMask
-          register={register("cnpj")}
+          register={register("cnpj", {
+            required: {
+              value: true,
+              message: "Deu bom",
+            },
+          })}
           width={"15rem"}
           heigth={""}
           placeholder={"Digite o seu CNPJ"}
@@ -71,7 +76,7 @@ export function FormLogin() {
           autoComplete="new-password"
         /> */}
         <Input
-          register={register("password")}
+          register={register("senha")}
           width={"15rem"}
           heigth={""}
           placeholder={"Digite sua senha"}
@@ -97,9 +102,7 @@ export function FormLogin() {
           type="submit"
           id="loginIn"
           disabled={disableButton}
-          onClick={() => {
-            router.push("/home"), setIsModalOpen(true), setModalType(1);
-          }}
+          // onClick={() => {}}
         />
         <Button
           text={"Criar conta"}

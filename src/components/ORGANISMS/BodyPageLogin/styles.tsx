@@ -39,7 +39,7 @@ export const wrapperLogin = styled.div`
     }
 
     .formLogin {
-      height: 100%;
+      height: 28rem;
       width: auto;
       background-color: #f5f5f5;
       border: 2px solid #0d5bd1;

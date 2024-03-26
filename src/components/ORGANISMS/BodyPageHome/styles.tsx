@@ -8,6 +8,9 @@ export const BodyHome = styled.div`
   .Content {
     padding: 0rem 2rem;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
     border-left: 1px solid black;
     border-right: 1px solid black;
   }
