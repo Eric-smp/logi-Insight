@@ -1,4 +1,4 @@
-import { FormLogin } from "@/components";
+import { FormLogin, CardNotificationLogin } from "@/components";
 import * as Styles from "./styles";
 
 export function BodyPageLogin() {
@@ -8,15 +8,16 @@ export function BodyPageLogin() {
         <div className="introductionSoftware">
           <h1>Logi Insight</h1>
           <p>
-            É mais do que apenas uma ferramenta convencional de gestão de
-            estoque; é uma resposta inovadora às complexidades enfrentadas pelas
-            empresas na cadeia de suprimentos moderna
+            Logi Insight uma ferramenta de gerenciamento de logística, que ajuda na vistoria e controle de produtos.
           </p>
         </div>
         <div className="formLogin">
           <FormLogin />
         </div>
       </div>
+
+      <CardNotificationLogin/>
+
     </Styles.wrapperLogin>
   );
 }

@@ -6,8 +6,8 @@ export function NavHeaderDesktop() {
   const route = useRouter();
   return (
     <Styles.navHeader>
-      <h3>Sobre nós</h3>
-      <h3>Fale Conosco</h3>
+      {/* <h3>Sobre nós</h3>
+      <h3>Fale Conosco</h3> */}
       <Button
         text={"sair"}
         heigth={""}

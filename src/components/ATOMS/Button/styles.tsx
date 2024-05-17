@@ -15,7 +15,7 @@ export const buttonStyle = styled.button<TButton>`
   color: ${({ color }) => color || "#000"};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   /* cursor: not-allowed; */
-
+    opacity: ${(props) => props.disabled ? '0.5' : '1'};
   outline: none;
   font-size: 1rem;
   :disabled {

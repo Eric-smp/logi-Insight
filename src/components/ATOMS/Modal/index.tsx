@@ -1,4 +1,4 @@
-import { ModalCreateLogin, ModalInsertProduct } from "@/components";
+import { ModalCreateLogin, ModalInsertProduct, ModalErrorLogin } from "@/components";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
 import * as Styles from "./styles";
 
@@ -7,6 +7,7 @@ export function Modal() {
   const ModalList = [
     <ModalCreateLogin key="0" />,
     <ModalInsertProduct key="1" />,
+    <ModalErrorLogin key='2'/>
   ];
 
   return (

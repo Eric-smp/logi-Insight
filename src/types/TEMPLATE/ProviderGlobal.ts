@@ -15,6 +15,11 @@ export type TProviderGlobal ={
     
     handleCreateProdut: ({nomeProduto,quantidade}:TCreateProduct) => void
 
+    notificationLogin: boolean,
+    setNotificationLogin: Dispatch<SetStateAction<boolean>>
+
+    notificationProduct: boolean,
+    setNotificationProduct: Dispatch<SetStateAction<boolean>>
 }
 
 export interface ChildrenType {

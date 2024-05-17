@@ -1,7 +1,7 @@
 import { X, Eye, EyeOff } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import * as Styles from "./styles";
-import { Input, Button, MaterialInputMask } from "@/components";
+import { Input, Button, MaterialInputMask, CardErrorPassword } from "@/components";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
 import { TCreateUser } from "@/types";
 import { off } from "process";
@@ -11,7 +11,11 @@ export function ModalCreateLogin() {
   const [visiblePassword, setVisiblePassword] = useState(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [messageError, setMessageError] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [openCardErro, setOpenCardErro] = useState(false);
+  const [maiuscula, setMaiuscula] = useState(false);
+  const [numero, setNumero] = useState(false);
+  const [caracterEspecial, setCaracterEspecial] = useState(false);
+  const [minimoCaracter, setMinimoCaracter] = useState(false);
 
   const { setIsModalOpen, handleGetUser, password, setPassword } = useGlobal();
   const {
@@ -35,30 +39,69 @@ export function ModalCreateLogin() {
       watchName !== undefined &&
       watchSurname !== "" &&
       watchSurname !== undefined &&
-      watchCNPJ !== "" &&
-      watchCNPJ !== undefined &&
+ 
+      watchCNPJ !== undefined && watchCNPJ !== '' &&
       watchPassword !== "" &&
-      watchPassword !== undefined
+      watchPassword !== undefined && maiuscula && numero && caracterEspecial && minimoCaracter
     ) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  }, [watchCNPJ, watchName, watchPassword, watchSurname]);
+  }, [caracterEspecial, maiuscula, minimoCaracter, numero, watchCNPJ, watchName, watchPassword, watchSurname]);
 
   useEffect(() => {
     if (watchPassword !== "" && watchPassword !== undefined) {
-      setMessageError(false);
-    } else {
       setMessageError(true);
+      setOpenCardErro(true)
+    } else {
+      setMessageError(false);
+      setOpenCardErro(false)
     }
   }, [watchPassword]);
+
+  console.log(watchCNPJ)
+
+
+  useEffect(() => {
+    const maiuscula = /[A-Z]/.test(watchPassword);
+    const caracterEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(watchPassword);
+    const contemNumero = /\d/.test(watchPassword);
+
+    if (maiuscula) {
+      setMaiuscula(true);
+    } else {
+      setMaiuscula(false);
+    }
+
+    if (caracterEspecial) {
+      setCaracterEspecial(true);
+    } else {
+      setCaracterEspecial(false);
+    }
+
+    if (contemNumero) {
+      setNumero(true);
+    } else {
+      setNumero(false);
+    }
+
+    if (watchPassword && watchPassword.length > 6) {
+      setMinimoCaracter(true);
+    } else {
+      setMinimoCaracter(false);
+    }
+
+    if (maiuscula && caracterEspecial && contemNumero && minimoCaracter) {
+      setMessageError(false);
+    }
+  }, [minimoCaracter, watchPassword]);
 
   return (
     <Styles.ContentModal>
       <header>
         <span>
-          <X color="#0d5bd1" onClick={() => setIsModalOpen(false)} />
+          <X color="#0d5bd1" onClick={() => setIsModalOpen(false)} style={{cursor:'pointer'}} />
         </span>
         <h1>Crie sua conta</h1>
       </header>
@@ -113,7 +156,7 @@ export function ModalCreateLogin() {
           autoComplete="new-password"
           id="createPassword"
           error={messageError}
-          messageError="Senha incorreta"
+       
           icon={
             visiblePassword ? (
               <EyeOff
@@ -127,6 +170,14 @@ export function ModalCreateLogin() {
             )
           }
         />
+        {
+          openCardErro ?
+         
+          < CardErrorPassword letraMaiscula={maiuscula} numero={numero} caracterEspecial={caracterEspecial} minimoCaracter={minimoCaracter} />
+          :
+           null 
+        }
+
 
         <Button
           text={"Criar conta"}

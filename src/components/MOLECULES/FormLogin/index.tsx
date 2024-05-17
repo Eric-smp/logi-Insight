@@ -102,7 +102,7 @@ export function FormLogin() {
           type="submit"
           id="loginIn"
           disabled={disableButton}
-          onClick={() => router.push("/home")}
+        
         />
         <Button
           text={"Criar conta"}

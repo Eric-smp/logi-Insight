@@ -5,4 +5,5 @@ export const WrapperHome = styled.div`
   height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden;
+  position: relative;
 `;

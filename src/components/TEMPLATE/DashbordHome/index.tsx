@@ -1,4 +1,4 @@
-import { HeaderGlobal, BodyPageHome, Modal } from "@/components";
+import { HeaderGlobal, BodyPageHome, Modal, CardNotificationProduct } from "@/components";
 
 import * as Styles from "./styles";
 
@@ -8,6 +8,7 @@ export function DashbordHome() {
       <Modal />
       <HeaderGlobal />
       <BodyPageHome />
+      <CardNotificationProduct/>
     </Styles.Wrapper>
   );
 }

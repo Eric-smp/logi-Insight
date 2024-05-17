@@ -9,6 +9,7 @@ export const ModalProduct = styled.div`
   flex-direction: column;
   gap: 2rem;
   background-color: #fff;
+  border-radius: 1rem;
 
   header {
     width: 100%;

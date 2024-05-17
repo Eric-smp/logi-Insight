@@ -1,4 +1,4 @@
-import { HeaderLogin, BodyPageLogin, Modal } from "@/components";
+import { HeaderLogin, BodyPageLogin, Modal, CardNotificationLogin } from "@/components";
 import * as Styles from "./styles";
 
 export function DashbordLogin() {

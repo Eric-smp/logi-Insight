@@ -6,10 +6,7 @@ import { useEffect, useState } from "react";
 export function CardProducts() {
 
    const [produtos, setProdutos] = useState<TCreateProduct[]>([]);
-  const exempleProduct = [
-    { product: "Macarrão", quantidade: 2 },
-    { product: "Tomate", quantidade: 15 },
-  ];
+
   const fetchProducts = async () => {
     const url = `${process.env.GET_PRODUCT}`
     try {

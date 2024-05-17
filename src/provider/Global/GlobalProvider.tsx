@@ -25,7 +25,11 @@ export const initialState: TProviderGlobal = {
   loginUser: () => {},
   password: "",
   setPassword: () => { },
-  handleCreateProdut: () => {},
+  handleCreateProdut: () => { },
+  notificationLogin: false,
+  setNotificationLogin: () => { },
+  notificationProduct: false,
+  setNotificationProduct: () => { },
 };
 
 const GlobalContext = createContext<TProviderGlobal>(initialState);
@@ -35,6 +39,8 @@ function GlobalProvider({ children }: ChildrenType) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<number>(0);
   const [password, setPassword] = useState("");
+  const [notificationLogin, setNotificationLogin] = useState(false);
+  const [notificationProduct, setNotificationProduct] = useState(false);
 
   useEffect(() => {}, [isModalOpen]);
 
@@ -57,6 +63,10 @@ function GlobalProvider({ children }: ChildrenType) {
       try {
         await Axios.post(url, params, config);
         setIsModalOpen(false);
+        setNotificationLogin(true);
+        setTimeout(() => {
+          setNotificationLogin(false);
+        }, 2000);
       } catch (error) {
         console.log("Deu erro");
       }
@@ -83,6 +93,8 @@ function GlobalProvider({ children }: ChildrenType) {
         setIsModalOpen(false);
         router.push("/home");
       } catch (error) {
+        setModalType(2);
+      setIsModalOpen(true)
         console.log("Essa conta não existe");
       }
     },
@@ -106,7 +118,11 @@ function GlobalProvider({ children }: ChildrenType) {
     try {
       await Axios.post(url, params, config);
       setIsModalOpen(false);
-      window.location.reload()
+      setNotificationProduct(true);
+      setTimeout(() => {
+        setNotificationProduct(false);
+      }, 2000);
+      window.location.reload();
     } catch (error) {
       console.log(error)
     }
@@ -123,8 +139,12 @@ function GlobalProvider({ children }: ChildrenType) {
       password,
       setPassword,
       handleCreateProdut,
+      notificationLogin,
+      setNotificationLogin,
+      notificationProduct,
+      setNotificationProduct
     }),
-    [isModalOpen, modalType, handleGetUser, loginUser, password, handleCreateProdut]
+    [isModalOpen, modalType, handleGetUser, loginUser, password, handleCreateProdut, notificationLogin, notificationProduct]
   );
 
   return (
