@@ -16,6 +16,8 @@ export interface TInput{
     onChange?: ChangeEventHandler<HTMLInputElement> | undefined
   register?: any
   isInputMask?:boolean
+  messageError?: string
+  error?: boolean
 
 
 

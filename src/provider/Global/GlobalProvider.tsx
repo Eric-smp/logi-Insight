@@ -12,6 +12,7 @@ import {
   TProviderGlobal,
   TCreateUser,
   TUserLogin,
+  TCreateProduct
 } from "@/types";
 import { useRouter } from "next/router";
 
@@ -22,6 +23,9 @@ export const initialState: TProviderGlobal = {
   setModalType: () => {},
   handleGetUser: () => {},
   loginUser: () => {},
+  password: "",
+  setPassword: () => { },
+  handleCreateProdut: () => {},
 };
 
 const GlobalContext = createContext<TProviderGlobal>(initialState);
@@ -30,6 +34,7 @@ function GlobalProvider({ children }: ChildrenType) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<number>(0);
+  const [password, setPassword] = useState("");
 
   useEffect(() => {}, [isModalOpen]);
 
@@ -53,7 +58,7 @@ function GlobalProvider({ children }: ChildrenType) {
         await Axios.post(url, params, config);
         setIsModalOpen(false);
       } catch (error) {
-        console.log(error);
+        console.log("Deu erro");
       }
     },
     []
@@ -84,6 +89,29 @@ function GlobalProvider({ children }: ChildrenType) {
     [router]
   );
 
+  const handleCreateProdut = useCallback(async ({nomeProduto,quantidade}:TCreateProduct) => {
+
+    const url = './api/Product/createProduct'
+    const config = { 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+     }
+    
+    const params = {
+      nomeProduto,
+      quantidade
+    }
+
+    try {
+      await Axios.post(url, params, config);
+      setIsModalOpen(false);
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+  }, []);
+
   const value = useMemo(
     () => ({
       isModalOpen,
@@ -92,8 +120,11 @@ function GlobalProvider({ children }: ChildrenType) {
       setModalType,
       handleGetUser,
       loginUser,
+      password,
+      setPassword,
+      handleCreateProdut,
     }),
-    [isModalOpen, modalType, handleGetUser, loginUser]
+    [isModalOpen, modalType, handleGetUser, loginUser, password, handleCreateProdut]
   );
 
   return (

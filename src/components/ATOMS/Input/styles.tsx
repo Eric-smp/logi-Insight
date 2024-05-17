@@ -12,10 +12,21 @@ export const stylesInput = styled.div<TDivInput>`
   display: flex;
   align-items: center;
   width: ${({ divInput }) => divInput};
+
   .prefixIcon {
     position: absolute;
     padding-top: 0.3rem;
     right: 0.5rem;
+  }
+
+  .messageErrorDiv {
+    position: absolute;
+    bottom: -16px;
+    right: 0px;
+
+    p {
+      font-size: 0.7rem;
+    }
   }
 `;
 
@@ -25,7 +36,7 @@ export const inputStyle = styled.input<TInput>`
   width: ${({ width }) => width || "15rem"};
   height: ${({ heigth }) => heigth || "2.5rem"};
   border-radius: 10px;
-  border: 2px solid #0d5bd1;
+  border: 2px solid ${({ error }) => (error ? "red" : "#0d5bd1")};
   border-radius: 0.5rem;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || "transparent"};

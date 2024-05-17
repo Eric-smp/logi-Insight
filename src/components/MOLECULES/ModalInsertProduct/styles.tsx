@@ -5,6 +5,9 @@ export const ModalProduct = styled.div`
   max-width: 35rem;
   height: auto;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   background-color: #fff;
 
   header {
@@ -27,5 +30,32 @@ export const ModalProduct = styled.div`
         cursor: pointer;
       }
     }
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    .addProduct {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      align-items: center;
+
+      .addInput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 2rem;
+        width: 35px;
+        height: 35px;
+        background-color: #0d5bd1;
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
   }
 `;

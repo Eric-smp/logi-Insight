@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
-import {TCreateUser, TUserLogin} from '@/types'
+import {TCreateUser, TUserLogin,TCreateProduct} from '@/types'
 
 export type TProviderGlobal ={
     isModalOpen:boolean,
@@ -9,6 +9,11 @@ export type TProviderGlobal ={
 
     handleGetUser: ({nome, sobrenome, cnpj, senha }:TCreateUser) => void
     loginUser: ({cnpj, senha}:TUserLogin) => void
+
+    password: string,
+    setPassword: Dispatch<SetStateAction<string>>
+    
+    handleCreateProdut: ({nomeProduto,quantidade}:TCreateProduct) => void
 
 }
 

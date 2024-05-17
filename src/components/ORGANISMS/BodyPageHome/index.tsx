@@ -1,3 +1,4 @@
+import { CardProducts } from "@/components";
 import { Pencil } from "lucide-react";
 import * as Styles from "./styles";
 import { useGlobal } from "@/provider/Global/GlobalProvider";
@@ -7,7 +8,7 @@ export function BodyPageHome() {
   return (
     <Styles.BodyHome>
       <div className="Content">
-        <h1>Aqui é o corpo</h1>
+        <CardProducts />
       </div>
       <span
         onClick={() => {

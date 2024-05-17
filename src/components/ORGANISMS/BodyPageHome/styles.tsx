@@ -3,16 +3,17 @@ import styled from "styled-components";
 export const BodyHome = styled.div`
   width: 100%;
   height: 80%;
-  padding: 2rem 2rem;
+  padding: 2rem 2rem 3rem;
 
   .Content {
     padding: 0rem 2rem;
     height: 100%;
     display: flex;
+    align-items: flex-start;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
     /* background-color: red; */
-    border-left: 1px solid black;
-    border-right: 1px solid black;
   }
 
   span {

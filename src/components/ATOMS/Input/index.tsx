@@ -16,11 +16,13 @@ export function Input({
   onChange,
   register,
   isInputMask,
+  messageError,
+  error,
 }: TInput) {
   return (
     <Styles.stylesInput divInput={width}>
       <Styles.Label backgroundLabel={backgroundLalbe}>{label}</Styles.Label>
-
+      {/* <input type="text" /> */}
       <Styles.inputStyle
         heigth={heigth}
         placeholder={placeholder}
@@ -35,10 +37,17 @@ export function Input({
         // backgroundLalbe={bac}
         onChange={onChange}
         register={register}
+        messageError={messageError}
+        error={error}
         {...register}
       />
 
       <span className="prefixIcon">{icon}</span>
+      {error ? (
+        <div className="messageErrorDiv">
+          <p>{messageError}</p>
+        </div>
+      ) : null}
     </Styles.stylesInput>
   );
 }

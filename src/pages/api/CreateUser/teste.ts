@@ -25,7 +25,7 @@ async function handler(
     res.status(200)
     res.end(JSON.stringify(result.data))    
  } catch (error: any) {
-    console.log(error)
+    console.log(error.res.data)
     res.status(406).json({ message: (error as Error).message })
   }
 }

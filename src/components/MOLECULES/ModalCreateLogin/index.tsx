@@ -10,7 +10,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 export function ModalCreateLogin() {
   const [visiblePassword, setVisiblePassword] = useState(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { setIsModalOpen, handleGetUser } = useGlobal();
+  const [messageError, setMessageError] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+
+  const { setIsModalOpen, handleGetUser, password, setPassword } = useGlobal();
   const {
     register,
     handleSubmit,
@@ -42,6 +45,14 @@ export function ModalCreateLogin() {
       setIsButtonDisabled(true);
     }
   }, [watchCNPJ, watchName, watchPassword, watchSurname]);
+
+  useEffect(() => {
+    if (watchPassword !== "" && watchPassword !== undefined) {
+      setMessageError(false);
+    } else {
+      setMessageError(true);
+    }
+  }, [watchPassword]);
 
   return (
     <Styles.ContentModal>
@@ -101,6 +112,8 @@ export function ModalCreateLogin() {
           backgroundLalbe="#fff"
           autoComplete="new-password"
           id="createPassword"
+          error={messageError}
+          messageError="Senha incorreta"
           icon={
             visiblePassword ? (
               <EyeOff
@@ -114,6 +127,7 @@ export function ModalCreateLogin() {
             )
           }
         />
+
         <Button
           text={"Criar conta"}
           heigth={"3rem"}
