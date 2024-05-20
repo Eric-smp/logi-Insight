@@ -13,11 +13,10 @@ export function CardProducts() {
       const res = await Axios.get('http://localhost:8080/produto/list')
        setProdutos(res.data);
     } catch (error) {
-      
+    console.log(error)    
     }
   };
   
-  console.log(produtos)
   useEffect(() => { 
     fetchProducts();
   }, []);
