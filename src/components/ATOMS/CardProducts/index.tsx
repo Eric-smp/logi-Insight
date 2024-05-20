@@ -10,8 +10,12 @@ export function CardProducts() {
   const fetchProducts = async () => {
     const url = `${process.env.GET_PRODUCT}`
     try {
-      const res = await Axios.get('https://37b2-2804-214-8134-89ad-7128-c40a-7f45-42f2.ngrok-free.app/produto/list')
-       setProdutos(res.data);
+      const res = await Axios.get('http://localhost:8080/produto/list')
+      if (Array.isArray(res.data)) {
+        setProdutos(res.data);
+      } else {
+        console.error('Data is not an array:', res.data);
+      }
     } catch (error) {
     console.log(error)    
     }
